@@ -53,7 +53,7 @@ class BostonCrimeDataMartWriterServiceImpl(sc: SparkSession, crimeDF: Dataset[Ro
      with prepared_median_select as (
        select district, count(incident_number) crimes_total_by_month_district
        from full_table
-       group by month, district
+       group by year, month, district
      )
        select district, percentile_approx(crimes_total_by_month_district, 0.5) crimes_monthly
        from prepared_median_select
